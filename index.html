@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Một lời muốn nói</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+  <section class="loading-screen" id="loadingScreen" aria-label="Đang tải trang">
+    <div class="loading-heart" aria-hidden="true">♥</div>
+    <p>Đang chuẩn bị một điều đặc biệt...</p>
+    <div class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  </section>
+
+  <main class="love-card" aria-live="polite">
+    <div class="sparkle sparkle-one">✦</div>
+    <div class="sparkle sparkle-two">✦</div>
+    <p class="eyebrow">Gửi em, người đặc biệt nhất</p>
+    <div class="heart-icon" aria-hidden="true">♥</div>
+    <h1>Anh thực sự rất trân trọng mối quan hệ này.<br>Cho anh cơ hội được yêu em nhé</h1>
+
+    <div class="actions" id="actions">
+      <button class="button button-yes" id="yesButton" type="button">Dạaaa.</button>
+      <button class="button button-no" id="noButton" type="button">Khồnggg.</button>
+    </div>
+
+    <p class="answer" id="answer" role="status"></p>
+  </main>
+
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+  <script src="script.js"></script>
+</body>
+</html>
