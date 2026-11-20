@@ -3,32 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Một lời muốn nói</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Tính giá TikTok Shop</title>
+  <link rel="stylesheet" href="calculator.css">
+  <script src="calculator.js" defer></script>
 </head>
-<body class="is-loading">
-  <section class="loading-screen" id="loadingScreen" aria-label="Đang tải trang">
-    <div class="loading-heart" aria-hidden="true">♥</div>
-    <p>Đang chuẩn bị một điều đặc biệt...</p>
-    <div class="loading-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-  </section>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">CÔNG CỤ TÍNH GIÁ</p>
+        <h1>Tính giá TikTok Shop</h1>
+        <p class="intro">Tính giá hòa vốn và lãi ròng cho từng combo, theo công thức trong file Excel.</p>
+      </div>
+      <button class="button button-secondary" id="resetButton" type="button">Khôi phục số liệu Excel</button>
+    </header>
 
-  <main class="love-card" aria-live="polite">
-    <div class="sparkle sparkle-one">✦</div>
-    <div class="sparkle sparkle-two">✦</div>
-    <p class="eyebrow">Gửi em, người đặc biệt nhất</p>
-    <div class="heart-icon" aria-hidden="true">♥</div>
-    <h1>Anh thực sự rất trân trọng mối quan hệ này.<br>Cho anh cơ hội được yêu em nhé</h1>
+    <section class="card" aria-labelledby="feesTitle">
+      <div class="section-heading">
+        <div>
+          <h2 id="feesTitle">Phí áp dụng cho các combo</h2>
+          <p>Thay đổi các khoản phí tại đây; kết quả sẽ được tính lại ngay.</p>
+        </div>
+      </div>
+      <div class="settings-grid" id="settings"></div>
+      <p class="formula-note">Phí hoa hồng mặc định là 13% (shop thường). Có thể sửa thành mức phí shop của bạn.</p>
+    </section>
 
-    <div class="actions" id="actions">
-      <button class="button button-yes" id="yesButton" type="button">Dạaaa.</button>
-      <button class="button button-no" id="noButton" type="button">Khồnggg.</button>
-    </div>
+    <section class="card" aria-labelledby="pricingTitle">
+      <div class="section-heading">
+        <div>
+          <h2 id="pricingTitle">Giá bán và lãi theo combo</h2>
+          <p>Giá nhập mỗi sản phẩm lấy từ ô giá nhập combo 1; các combo tiếp theo nhân theo số lượng.</p>
+        </div>
+        <p class="table-hint">Bảng có thể cuộn ngang trên màn hình nhỏ.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th scope="col">Combo</th>
+              <th scope="col">Quảng cáo (đ)</th>
+              <th scope="col">Giá nhập (đ)</th>
+              <th scope="col">Giá hòa vốn (đ)</th>
+              <th scope="col">Giá bán (đ)</th>
+              <th scope="col">Lãi ròng (đ)</th>
+              <th scope="col">Lãi ròng / giá nhập</th>
+            </tr>
+          </thead>
+          <tbody id="products"></tbody>
+        </table>
+      </div>
+      <p class="formula-note">Giá hòa vốn = ROUND((giá nhập + phí xử lý + phí hoàn vận chuyển + phí vận hành) / (1 − các tỷ lệ phí) + quảng cáo, 1). Lãi ròng % = lãi ròng / giá nhập.</p>
+      <p class="status-message" id="pricingStatus" role="status" aria-live="polite"></p>
+    </section>
 
-    <p class="answer" id="answer" role="status"></p>
+    <section class="card" aria-labelledby="shippingTitle">
+      <div class="section-heading">
+        <div>
+          <h2 id="shippingTitle">Tính phí nhập hàng</h2>
+          <p>Công thức cân tính phí và tổng giá nhập từ sheet “List” trong Excel.</p>
+        </div>
+      </div>
+
+      <div class="shipping-layout">
+        <div>
+          <h3>Thông tin đơn hàng</h3>
+          <div class="settings-grid shipping-inputs" id="shippingInputs"></div>
+        </div>
+        <div>
+          <h3>Bậc phí vận chuyển</h3>
+          <div class="table-wrap">
+            <table class="tier-table">
+              <thead>
+                <tr><th scope="col">Mốc cân (kg)</th><th scope="col">Phí theo kg (¥)</th></tr>
+              </thead>
+              <tbody id="shippingTiers"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="results-grid" id="shippingResults" aria-live="polite"></div>
+      <p class="formula-note">Cân tính phí là giá trị lớn hơn giữa cân nặng thực và cân nặng thể tích (dài × rộng × cao × số lượng / 6.000); nếu lớn hơn 1 kg thì làm tròn lên. Phí theo bậc được tính theo công thức trong Excel.</p>
+      <p class="status-message" id="shippingStatus" role="status" aria-live="polite"></p>
+    </section>
+
+    <footer>Chạy trực tiếp trên trình duyệt, không cần Excel hay kết nối mạng. Số liệu bạn nhập không được gửi đi đâu.</footer>
   </main>
-
-  <div class="hearts" id="hearts" aria-hidden="true"></div>
-  <script src="script.js"></script>
 </body>
 </html>
